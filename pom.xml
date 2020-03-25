@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.flipkart.foxtrot</groupId>
+    <groupId>io.appform.foxtrot</groupId>
     <artifactId>foxtrot-client</artifactId>
-    <version>0.2.7-SNAPSHOT</version>
+    <version>0.2.8-SNAPSHOT</version>
 
     <properties>
         <feign.version>8.15.1</feign.version>
@@ -24,10 +24,10 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:https://github.com/flipkart-incubator/foxtrot-client.git</connection>
-        <developerConnection>scm:git:https://github.com/flipkart-incubator/foxtrot-client.git</developerConnection>
+        <connection>scm:git:https://github.com/appform-io/foxtrot-client.git</connection>
+        <developerConnection>scm:git:https://github.com/appform-io/foxtrot-client.git</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/flipkart-incubator/foxtrot-client</url>
+        <url>https://github.com/appform-io/foxtrot-client</url>
     </scm>
 
     <licenses>
