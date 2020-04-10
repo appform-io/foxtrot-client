@@ -1,5 +1,9 @@
 package io.appform.foxtrot.client.senders;
 
+import com.google.common.net.HttpHeaders;
+import feign.RequestInterceptor;
+import feign.RequestTemplate;
+import feign.auth.BasicAuthRequestInterceptor;
 import io.appform.foxtrot.client.Document;
 import io.appform.foxtrot.client.EventSender;
 import io.appform.foxtrot.client.FoxtrotClientConfig;
@@ -15,6 +19,7 @@ import feign.FeignException;
 import feign.Response;
 import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +45,7 @@ public class HttpSyncEventSender extends EventSender {
         this.httpClient = Feign.builder()
                 .client(new OkHttpClient(okHttpClient))
                 .logger(slf4jLogger)
+                .requestInterceptor(getIntercepter(config))
                 .logLevel(feign.Logger.Level.BASIC)
                 .target(new FoxtrotTarget<>(FoxtrotHttpClient.class, "foxtrot", client));
     }
@@ -93,5 +99,17 @@ public class HttpSyncEventSender extends EventSender {
 
     private boolean is2XX(int status) {
         return status / 100 == 2;
+    }
+
+    private RequestInterceptor getIntercepter(FoxtrotClientConfig foxtrotClientConfig){
+        return new RequestInterceptor() {
+            @Override
+            public void apply(RequestTemplate template) {
+                if (StringUtils.isEmpty(foxtrotClientConfig.getAuthToken())){
+                    return;
+                }
+                template.header(HttpHeaders.AUTHORIZATION,  String.format("Bearer %s", foxtrotClientConfig.getAuthToken()));
+            }
+        };
     }
 }

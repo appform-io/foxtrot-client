@@ -65,6 +65,8 @@ public class FoxtrotClientConfig {
      */
     private int batchSize = 200;
 
+    private String authToken;
+
     public FoxtrotClientConfig() {
     }
 
@@ -146,5 +148,13 @@ public class FoxtrotClientConfig {
 
     public void setEndpointType(EndpointType endpointType) {
         this.endpointType = endpointType;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }
